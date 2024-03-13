@@ -13,7 +13,6 @@ runs:
     - name: Upload Artifact
       if: always()
       uses: actions/upload-artifact@v3
-      shell: bash
       with:
         name: ${{ inputs.name }}
         path: ${{ inputs.path }}
