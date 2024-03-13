@@ -1,0 +1,12 @@
+name: 'Upload Artifact'
+description: 'Uploads a file as an artifact'
+inputs:
+  name:
+    description: 'Name of the artifact'
+    required: true
+  path:
+    description: 'File or directory path to upload'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
