@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python
 RUN pip install pylint
 COPY entrypoint.sh /entrypoint.sh
 
