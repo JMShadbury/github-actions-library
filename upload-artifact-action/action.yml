@@ -8,5 +8,12 @@ inputs:
     description: 'File or directory path to upload'
     required: true
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: 'composite'
+  shell: bash
+  steps:
+    - name: Upload Artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
