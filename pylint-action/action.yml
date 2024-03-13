@@ -1,0 +1,10 @@
+name: 'Pylint Action'
+description: 'Run Pylint on Python code'
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: true
+    default: '3.11'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
