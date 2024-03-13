@@ -1,0 +1,11 @@
+{
+    "name": "merge-dependabot-action",
+    "version": "1.0.0",
+    "description": "A GitHub Action to merge Dependabot PRs",
+    "main": "index.js",
+    "dependencies": {
+      "@actions/core": "^1.2.7",
+      "@actions/github": "^4.0.0"
+    }
+  }
+  
