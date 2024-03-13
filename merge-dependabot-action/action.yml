@@ -1,5 +1,0 @@
-name: 'Merge Dependabot PRs'
-description: 'Automatically merges pull requests created by Dependabot'
-runs:
-  using: 'node12'
-  main: 'index.js'
