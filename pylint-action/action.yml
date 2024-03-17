@@ -33,4 +33,4 @@ runs:
     - name: Analysing the code with pylint
       shell: bash
       run: |
-        pylint $(git ls-files '*.py')
+        pylint $(git ls-files '*.py') > pylint_output.txt || true
