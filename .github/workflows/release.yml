@@ -24,8 +24,8 @@ jobs:
         git push origin v1
 
     - name: Delete Release
-        uses: JMShadbury/github-actions-library/delete-release@v1
-        with:
+      uses: JMShadbury/github-actions-library/delete-release@v1
+      with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           tag: v1
