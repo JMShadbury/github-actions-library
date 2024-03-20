@@ -13,11 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Git
-      run: |
-        git config --global user.name 'Your Name'
-        git config --global user.email 'your-email@example.com'
-
     - name: Delete existing tag
       run: |
         git push --delete origin v1
@@ -29,10 +24,11 @@ jobs:
         git push origin v1
 
     - name: Delete existing release
-      uses: actions/delete-release@v1
-      with:
-        api_token: ${{ secrets.GITHUB_TOKEN }}
-        tag: v1
+      run: |
+        RELEASE_ID=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/releases/tags/v1 | jq '.id')
+        if [ "$RELEASE_ID" != "null" ]; then
+          curl -X DELETE -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID
+        fi
 
     - name: Create new release
       uses: actions/create-release@v1
