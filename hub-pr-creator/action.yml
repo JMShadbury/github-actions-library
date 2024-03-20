@@ -13,6 +13,9 @@ inputs:
   labels:
     description: 'Labels for the PR'
     required: false
+  github_token:
+    description: 'Personal access token (PAT) for authentication'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -23,4 +26,4 @@ runs:
     - run: hub pull-request --base ${{ inputs.base_branch }} --head ${{ inputs.head_branch }} -m "${{ inputs.pr_title }}" -l ${{ inputs.labels }}
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github_token }} 
