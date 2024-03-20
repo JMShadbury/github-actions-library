@@ -23,12 +23,13 @@ jobs:
         git tag v1
         git push origin v1
 
-    - name: Delete existing release
-      run: |
-        RELEASE_ID=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/releases/tags/v1 | jq '.id')
-        if [ "$RELEASE_ID" != "null" ]; then
-          curl -X DELETE -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID
-        fi
+    - name: Delete Release
+        uses: JMShadbury/github-actions-library/delete-release@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          tag: v1
+      
 
     - name: Create new release
       uses: actions/create-release@v1
