@@ -13,13 +13,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Configure Git with PAT
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${{ secrets.GH_PAT }} | base64)"
+
     - name: Delete existing tag
-      env:
-        GIT_TOKEN: ${{ secrets.GH_PAT }}
       run: |
         git push --delete origin v1
         git tag --delete v1
-        
 
     - name: Create new tag
       run: |
@@ -29,15 +32,14 @@ jobs:
     - name: Delete Release
       uses: JMShadbury/github-actions-library/delete-release@v1
       with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          tag: v1
-      
+        github_token: ${{ secrets.GH_PAT }}
+        repository: ${{ github.repository }}
+        tag: v1
 
     - name: Create new release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       with:
         tag_name: v1
         release_name: Release v1
