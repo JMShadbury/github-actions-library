@@ -1,4 +1,4 @@
-- name: Create Pull Request with Label using hub-pr-creator
+- name: hub-pr-creator
   uses: JMShadbury/github-actions-library/hub-pr-creator@v1
   with:
     base_branch: 'main'
