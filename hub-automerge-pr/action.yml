@@ -1,0 +1,26 @@
+name: 'Create PR with Hub'
+description: 'Create a pull request and add labels'
+inputs:
+  base_branch:
+    description: 'Base branch for the PR'
+    required: true
+  head_branch:
+    description: 'Head branch for the PR'
+    required: true
+  pr_title:
+    description: 'Title for the PR'
+    required: true
+  labels:
+    description: 'Labels for the PR'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - run: sudo apt-get update && sudo apt-get install -y hub
+      shell: bash
+    - run: git config --global hub.protocol https
+      shell: bash
+    - run: hub pull-request --base ${{ inputs.base_branch }} --head ${{ inputs.head_branch }} -m "${{ inputs.pr_title }}" -l ${{ inputs.labels }}
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,13 @@
+name: 'Auto Merge PR'
+description: 'Automatically merge a PR after all status checks pass'
+inputs:
+  pr_number:
+    description: 'Number of the Pull Request to merge'
+    required: true
+  github_token:
+    description: 'GitHub Token for authentication'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'index.js'
