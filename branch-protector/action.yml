@@ -1,0 +1,11 @@
+name: 'Branch Protector'
+description: 'Prevent pushes and PRs to a branch unless by a specific actor'
+inputs:
+  allowed_actor:
+    description: 'GitHub actor who is allowed to push or create PR'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - run: bash ${{ github.action_path }}/branch-protect.sh ${{ inputs.allowed_actor }}
+      shell: bash
