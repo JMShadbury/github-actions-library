@@ -13,16 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Configure Git to use PAT
-      run: |
-        echo "machine github.com login x-access-token password ${{ secrets.GH_PAT }}" > ~/.netrc
-
     - name: Delete existing tag
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
       run: |
+        echo "url=https://x-access-token:${GH_PAT}@github.com" > ~/.git-credentials
+        git config --global credential.helper store
         git push --delete origin v1 || echo "Tag v1 not found."
         git tag --delete v1 || echo "Local tag v1 not found."
 
     - name: Create new tag
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
       run: |
         git tag v1
         git push origin v1
