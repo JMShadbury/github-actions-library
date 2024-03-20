@@ -1,11 +1,17 @@
 name: 'Branch Protector'
-description: 'Prevent pushes and PRs to a branch unless by a specific actor'
+description: 'Prevent specific actions on branches based on actors and branch restrictions'
 inputs:
   allowed_actor:
     description: 'GitHub actor who is allowed to push or create PR'
-    required: true
+    required: false
+  source_branch:
+    description: 'Source branch name for merge restriction'
+    required: false
+  target_branch:
+    description: 'Target branch name for merge restriction'
+    required: false
 runs:
   using: 'composite'
   steps:
-    - run: bash ${{ github.action_path }}/branch-protect.sh ${{ inputs.allowed_actor }}
+    - run: bash ${{ github.action_path }}/branch-protect.sh "${{ inputs.allowed_actor }}" "${{ inputs.source_branch }}" "${{ inputs.target_branch }}"
       shell: bash
