@@ -14,9 +14,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Delete existing tag
+      env:
+        GIT_TOKEN: ${{ secrets.GH_PAT }}
       run: |
         git push --delete origin v1
         git tag --delete v1
+        
 
     - name: Create new tag
       run: |
