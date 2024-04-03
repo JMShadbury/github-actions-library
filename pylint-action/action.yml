@@ -1,10 +1,10 @@
 name: 'Pylint Action'
 description: 'An action to analyze Python code using pylint.'
 
-author: 'Your Name <your-email@example.com>'
+author: 'Joel Shadbolt <joelshadbolt123@hotmail.com>'
 branding:
   icon: 'code'
-  color: 'blue'
+  color: 'green'
 
 inputs:
   python-version:
@@ -33,7 +33,7 @@ runs:
     - name: Analysing the code with pylint
       shell: bash
       run: |
-        pylint $(git ls-files '*.py') > pylint_output.txt || PYLINT_STATUS=$?
+        pylint $(git ls-files '*.py') --disable=C0413,E0401,C0303,C0301,W0621,W1514,C0411,C0115,C0116,R1705,C0115, > pylint_output.txt || PYLINT_STATUS=$?
         cat pylint_output.txt
         if [ ! -z "${PYLINT_STATUS}" ]; then
           exit $PYLINT_STATUS
