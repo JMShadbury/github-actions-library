@@ -1,7 +1,7 @@
 name: 'Pylint Action'
 description: 'An action to analyze Python code using pylint.'
 
-author: 'Joel Shadbolt <joelshadbolt123@hotmail.com>'
+
 branding:
   icon: 'code'
   color: 'green'
